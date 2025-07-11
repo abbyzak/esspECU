@@ -1,4 +1,4 @@
-
+/*
 const weddingSummaryWatcher = new MutationObserver(() => {
     const heading = document.querySelector('div.topmenu-navtitle[role="heading"][aria-level="1"]');
     const topNavBar = document.querySelector('div.topmenu-nav.flex.flex-row.items-center');
@@ -166,3 +166,4 @@ const weddingSummaryWatcher = new MutationObserver(() => {
     }
 });
 weddingSummaryWatcher.observe(document.body, { childList: true, subtree: true });
+*/
