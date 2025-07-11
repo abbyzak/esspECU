@@ -1,4 +1,4 @@
-
+/*
 
 (async function () { // Changed to async IIFE
     const styleId = "ios-calendar-style";
@@ -505,6 +505,7 @@
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", () =>
             setTimeout(() => tryApplyLayout().catch(console.error), 100)
+          */
         );
     }
 
