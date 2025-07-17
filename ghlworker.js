@@ -1,4 +1,3 @@
-<script>
 function createPopup() {
   const overlay = document.createElement('div');
   overlay.id = 'popup-overlay';
@@ -388,5 +387,3 @@ const sendCardMenuWatcher = new MutationObserver(() => {
 });
 
 sendCardMenuWatcher.observe(document.body, { childList: true, subtree: true });
-</script>
-
