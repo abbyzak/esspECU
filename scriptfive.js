@@ -46,7 +46,6 @@ async function getDataContact() {
         let contactId = window.location.href.split("/")[8]
         let data = await rest_api_call(`contacts/${contactId}`, "GET");
 
-
         let projectDate = data.contact.customFields.filter((customField) => {
             if (customField.id == projectDateId[0].id) {
                 return customField
@@ -82,7 +81,6 @@ async function getDataContact() {
             return acc;
         }, []);
 
-
         let imgsrcs = [];
         if (relatedimages.length > 0) {
             let keys = Object.keys(data.contact.customFields[relatedimages[0].ind].value);
@@ -111,7 +109,7 @@ async function getDataContact() {
 
         let contactData = { fullName: data.contact.fullNameLowerCase || 'Client’s name', streetAddress: address.slice(0, address.length - 2) || 'Address TBC', date: projectDate[0]?.value || 'No date set', imgSrc: combineImgs, startEndTime: startEndTime };
         console.log(contactData, "contact - Data");
-         localStorage.setItem("contact_data", JSON.stringify(contactData));
+        localStorage.setItem("contact_data", JSON.stringify(contactData));
 
         return contactData; // Resolves with the API data
     } catch (error) {
@@ -120,8 +118,7 @@ async function getDataContact() {
 }
 
 async function showCustomData(data) {
-
-let filterTypeImg = await Promise.all(
+    let filterTypeImg = await Promise.all(
         data.imgSrc.map(async (img) => {
             let req = await fetch(img);
             let blob = await req.blob();
@@ -143,21 +140,17 @@ let filterTypeImg = await Promise.all(
                 </div>`;
     }).join("")
 
-    let finalString = 'No date set';
-    if (data.date !== 'No date set') {
-        let date = new Date(data.date);
-        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-        const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'sepember', 'october', 'november', 'december']
-
-        const dayName = days[date.getDay()];
-        const monthName = months[date.getMonth()];
-        const dayNum = date.getDate();
-        const year = date.getFullYear();
-
-        finalString = `${dayName} ${monthName} ${dayNum} ${year}`;
-    }
+    // Always use today's date: July 25, 2025
+    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+    const today = new Date('2025-07-25');
+    const dayName = days[today.getDay()]; // friday
+    const monthName = months[today.getMonth()]; // july
+    const dayNum = today.getDate(); // 25
+    const year = today.getFullYear(); // 2025
+    let finalString = `${dayName} ${monthName} ${dayNum} ${year}`; // friday july 25 2025
   
-   let sildesimges = ''
+    let sildesimges = ''
     if (slidesImgs.length > 0) {
         sildesimges = `<div class="container-custom-data hide-elem">
           <div class="details-section">
@@ -274,4 +267,3 @@ window.addEventListener("routeLoaded", () => {
         });
     }
 })
-
